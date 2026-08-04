@@ -1,5 +1,6 @@
 com\example\employeeservice\controller\EmployeeController.class
 com\example\employeeservice\dto\DepartmentRequest.class
+com\example\employeeservice\dto\EmployeeNameResponse.class
 com\example\employeeservice\dto\EmployeeRequest.class
 com\example\employeeservice\repository\EmployeeRepository.class
 com\example\employeeservice\dto\UpdateStatusRequest.class

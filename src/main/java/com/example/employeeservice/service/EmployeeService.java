@@ -42,6 +42,13 @@ public class EmployeeService {
         return toResponse(findEntity(id));
     }
 
+    @Transactional(readOnly = true)
+    public EmployeeNameResponse getNameById(Long id) {
+        Employee employee = findEntity(id);
+        String fullName = employee.getFirstName() + " " + employee.getLastName();
+        return new EmployeeNameResponse(employee.getId(), fullName);
+    }
+
     public EmployeeResponse update(Long id, EmployeeRequest request) {
         Employee employee = findEntity(id);
         if (!employee.getEmail().equals(request.getEmail()) && employeeRepository.findByEmail(request.getEmail()).isPresent()) {

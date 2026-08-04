@@ -29,6 +29,11 @@ public class EmployeeController {
         return ResponseEntity.ok(employeeService.getByDesignation(designation));
     }
 
+    @GetMapping("/{id}/name")
+    public ResponseEntity<EmployeeNameResponse> getNameById(@PathVariable Long id) {
+        return ResponseEntity.ok(employeeService.getNameById(id));
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<EmployeeResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(employeeService.getById(id));
