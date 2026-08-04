@@ -1,5 +1,6 @@
 package com.example.employeeservice.dto;
 
+import com.example.employeeservice.entity.EmployeeStatus;
 import lombok.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -16,5 +17,6 @@ public class EmployeeResponse {
     private BigDecimal salary;
     private String designation;
     private String address;
+    private EmployeeStatus status;
     private DepartmentResponse department;
 }

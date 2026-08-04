@@ -33,6 +33,11 @@ public class EmployeeService {
     }
 
     @Transactional(readOnly = true)
+    public List<EmployeeResponse> getByDesignation(String designation) {
+        return employeeRepository.findByDesignationIgnoreCase(designation).stream().map(this::toResponse).toList();
+    }
+
+    @Transactional(readOnly = true)
     public EmployeeResponse getById(Long id) {
         return toResponse(findEntity(id));
     }
@@ -46,18 +51,28 @@ public class EmployeeService {
         return toResponse(employeeRepository.save(employee));
     }
 
-    public void delete(Long id) {
-        employeeRepository.delete(findEntity(id));
+    public EmployeeResponse updateSalary(Long id, UpdateSalaryRequest request) {
+        Employee employee = findEntity(id);
+        employee.setSalary(request.getSalary());
+        return toResponse(employeeRepository.save(employee));
+    }
+
+    public EmployeeResponse updateStatus(Long id, UpdateStatusRequest request) {
+        Employee employee = findEntity(id);
+        employee.setStatus(request.getStatus());
+        return toResponse(employeeRepository.save(employee));
     }
 
     private Employee findEntity(Long id) {
         return employeeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found with id: " + id));
     }
+
     private Department findDepartment(Long id) {
         return departmentRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Department not found with id: " + id));
     }
+
     private void copyRequest(EmployeeRequest request, Employee employee) {
         employee.setFirstName(request.getFirstName());
         employee.setLastName(request.getLastName());
@@ -70,11 +85,12 @@ public class EmployeeService {
         employee.setAddress(request.getAddress());
         employee.setDepartment(findDepartment(request.getDepartmentId()));
     }
+
     private EmployeeResponse toResponse(Employee employee) {
         Department department = employee.getDepartment();
         DepartmentResponse departmentResponse = new DepartmentResponse(department.getId(), department.getName(), department.getLocation());
         return new EmployeeResponse(employee.getId(), employee.getFirstName(), employee.getLastName(), employee.getEmail(),
                 employee.getPhoneNumber(), employee.getDateOfBirth(), employee.getJoinDate(), employee.getSalary(),
-                employee.getDesignation(), employee.getAddress(), departmentResponse);
+                employee.getDesignation(), employee.getAddress(), employee.getStatus(), departmentResponse);
     }
 }

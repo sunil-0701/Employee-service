@@ -11,29 +11,18 @@ import java.time.LocalDate;
 public class Employee {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false)
-    private String firstName;
-
-    @Column(nullable = false)
-    private String lastName;
-
-    @Column(nullable = false, unique = true)
-    private String email;
-
+    @Column(nullable = false) private String firstName;
+    @Column(nullable = false) private String lastName;
+    @Column(nullable = false, unique = true) private String email;
     private String phoneNumber;
-
-    @Column(nullable = false)
-    private LocalDate dateOfBirth;
-
-    @Column(nullable = false)
-    private LocalDate joinDate;
-
-    @Column(nullable = false, precision = 12, scale = 2)
-    private BigDecimal salary;
-
+    @Column(nullable = false) private LocalDate dateOfBirth;
+    @Column(nullable = false) private LocalDate joinDate;
+    @Column(nullable = false, precision = 12, scale = 2) private BigDecimal salary;
     private String designation;
     private String address;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, columnDefinition = "varchar(20) default 'ACTIVE'")
+    private EmployeeStatus status = EmployeeStatus.ACTIVE;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id", nullable = false)
     @ToString.Exclude @EqualsAndHashCode.Exclude
