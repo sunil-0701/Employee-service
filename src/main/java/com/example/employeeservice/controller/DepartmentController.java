@@ -1,7 +1,8 @@
 package com.example.employeeservice.controller;
 
-import com.example.employeeservice.dto.DepartmentRequest;
-import com.example.employeeservice.dto.DepartmentResponse;
+import com.example.employeeservice.constants.EndpointConstants;
+import com.example.employeeservice.dto.request.DepartmentRequest;
+import com.example.employeeservice.dto.response.DepartmentResponse;
 import com.example.employeeservice.service.DepartmentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/departments")
+@RequestMapping(EndpointConstants.DEPARTMENTS)
 @RequiredArgsConstructor
 public class DepartmentController {
     private final DepartmentService departmentService;

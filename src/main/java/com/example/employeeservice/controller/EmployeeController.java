@@ -1,6 +1,8 @@
 package com.example.employeeservice.controller;
 
-import com.example.employeeservice.dto.*;
+import com.example.employeeservice.constants.EndpointConstants;
+import com.example.employeeservice.dto.request.*;
+import com.example.employeeservice.dto.response.*;
 import com.example.employeeservice.service.EmployeeService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/employees")
+@RequestMapping(value = EndpointConstants.BASE_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
 public class EmployeeController {
     private final EmployeeService employeeService;
@@ -20,8 +22,9 @@ public class EmployeeController {
     }
 
     @GetMapping
-    public ResponseEntity<List<EmployeeResponse>> getAll() {
-        return ResponseEntity.ok(employeeService.getAll());
+    public ResponseEntity<GetEmployeeResponse> getAll(@RequestParam(defaultValue = "1") int currentPage,
+                                                        @RequestParam(defaultValue = "10") int perPage) {
+        return ResponseEntity.ok(employeeService.getAll(currentPage, perPage));
     }
 
     @GetMapping("/designation/{designation}")

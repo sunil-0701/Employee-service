@@ -1,14 +1,15 @@
 package com.example.employeeservice.entity;
 
 import jakarta.persistence.*;
+import com.example.employeeservice.enums.EmployeeStatus;
 import lombok.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "employees", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
-@Data @NoArgsConstructor @AllArgsConstructor
-public class Employee {
+@Data @NoArgsConstructor @AllArgsConstructor @EqualsAndHashCode(callSuper = true)
+public class Employee extends Audit {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false) private String firstName;
