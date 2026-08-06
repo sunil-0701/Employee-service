@@ -23,7 +23,7 @@ public class EmployeeController {
 
     @GetMapping
     public ResponseEntity<GetEmployeeResponse> getAll(@RequestParam(defaultValue = "1") int currentPage,
-                                                        @RequestParam(defaultValue = "10") int perPage) {
+                                                      @RequestParam(defaultValue = "10") int perPage) {
         return ResponseEntity.ok(employeeService.getAll(currentPage, perPage));
     }
 

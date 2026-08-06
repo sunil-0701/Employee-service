@@ -6,5 +6,6 @@ import lombok.*;
 
 @Data @NoArgsConstructor @AllArgsConstructor
 public class UpdateStatusRequest {
-    @NotNull(message = "Status is required") private EmployeeStatus status;
+    @NotNull(message = "Status is required")
+    private EmployeeStatus status;
 }

@@ -22,7 +22,7 @@ public class Employee extends Audit {
     private String designation;
     private String address;
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, columnDefinition = "varchar(20) default 'ACTIVE'")
+    @Column(nullable = false)
     private EmployeeStatus status = EmployeeStatus.ACTIVE;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id", nullable = false)

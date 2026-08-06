@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 
 @Data @NoArgsConstructor @AllArgsConstructor
 public class UpdateSalaryRequest {
-    @NotNull(message = "Salary is required") @Positive(message = "Salary must be positive")
+    @NotNull(message = "Salary is required")
+    @Positive(message = "Salary must be positive")
     private BigDecimal salary;
 }
